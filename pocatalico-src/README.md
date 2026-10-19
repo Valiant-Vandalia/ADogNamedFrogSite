@@ -1,1 +1,20 @@
-IyBQT0NBVEFMSUNPIHNvdXJjZQoKVGV4dC1vbmx5IHNvdXJjZSBmb3IgdGhlIFBPQ0FUQUxJQ08gd2ViIGJ1aWxkLgoKLSBgZ29kb3QvYCAtIHRoZSBHb2RvdCA0LjMgcHJvamVjdCB3aXRoIGV2ZXJ5IHBpY3R1cmUgcmVtb3ZlZC4gQWxsIHBpeGVsIGFydAogIGlzIGdlbmVyYXRlZCwgbmV2ZXIgc3RvcmVkOiBgdG9vbHMvbWFrZV9waXhlbF9hc3NldHMucHlgIGRyYXdzIHRoZSB0aWxlCiAgYXRsYXMgYW5kIGB0b29scy9tYWtlX3Nwcml0ZXMucHlgIGRyYXdzIHRoZSBjaGFyYWN0ZXIgc2hlZXRzLCBwcm9wcywgY3JvcAogIHN0YWdlcywgYW5kIGl0ZW0gaWNvbnMsIGJvdGggZnJvbSB0aGUgb25lIHBhbGV0dGUgaW4KICBgZ29kb3QvYXNzZXRzL3BhbGV0dGUuanNvbmAuCi0gYHRvb2xzL2AgLSB0aG9zZSB0d28gZ2VuZXJhdG9yIHNjcmlwdHMgKFB5dGhvbiAzLCBuZWVkcyBQaWxsb3cpLgoKQnVpbGQgcmVjaXBlICh3aGF0IHRoZSBHaXRIdWIgd29ya2Zsb3cgcnVucywgaW4gb3JkZXIpOgoKMS4gYHB5dGhvbjMgdG9vbHMvbWFrZV9waXhlbF9hc3NldHMucHlgIGFuZCBgcHl0aG9uMyB0b29scy9tYWtlX3Nwcml0ZXMucHlgCjIuIEdvZG90IDQuMyBoZWFkbGVzczogYC0taW1wb3J0YCwgdGhlbiB0aGUgdGhyZWUgdGVzdCBzY2VuZXMgaW4KICAgYGdvZG90L3Rlc3RzL2AgKHN0YXJ0X3Rlc3QsIHNtb2tlX3Rlc3QsIHBsYXlfdGVzdCkKMy4gYC0tZXhwb3J0LXJlbGVhc2UgIldlYiJgIHRvIHRoZSBwdWJsaXNoZWQgcGFnZQoKU3R5bGUgbGF3IGZvciBhbGwgYXJ0OiBzaW1wbGUgMTYtYml0IHBpeGVsIGFydCBpbiB0aGUgU05FUyBGaW5hbCBGYW50YXN5IElJCmZhbWlseSwgdG9wLWRvd24gdGlsZXMgYW5kIHNtYWxsIHNwcml0ZXMsIG9uZSBicmlnaHQgbGltaXRlZCBwYWxldHRlLgo=
+# POCATALICO source
+
+Text-only source for the POCATALICO web build.
+
+- `godot/` - the Godot 4.3 project with every picture removed. All pixel art
+  is generated, never stored: `tools/make_pixel_assets.py` draws the tile
+  atlas and `tools/make_sprites.py` draws the character sheets, props, crop
+  stages, and item icons, both from the one palette in
+  `godot/assets/palette.json`.
+- `tools/` - those two generator scripts (Python 3, needs Pillow).
+
+Build recipe (what the GitHub workflow runs, in order):
+
+1. `python3 tools/make_pixel_assets.py` and `python3 tools/make_sprites.py`
+2. Godot 4.3 headless: `--import`, then the three test scenes in
+   `godot/tests/` (start_test, smoke_test, play_test)
+3. `--export-release "Web"` to the published page
+
+Style law for all art: simple 16-bit pixel art in the SNES Final Fantasy II
+family, top-down tiles and small sprites, one bright limited palette.
